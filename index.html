@@ -17,6 +17,9 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- Fontawesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="/css/styles.css" />
 
@@ -115,32 +118,155 @@
     </section>
 
     <!-- Main content -->
-    <main class="container-xl">
+    <main class="container-xl p-0 overflow-hidden">
 
       <!-- Sección introducción -->
       <section class="section-intro row">
 
         <div class="col-12 col-md-6">
-          <h1>Bievenido a nuestro shop Gamer</h1>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum fugit ipsa iste obcaecati veritatis consectetur quaerat distinctio consequatur nihil! Iusto a natus voluptates iure magnam nihil veritatis, mollitia hic nesciunt quam ipsam expedita praesentium sequi ducimus animi sit at, quo fuga id quisquam perspiciatis. Magnam saepe nesciunt quis nemo similique perspiciatis quibusdam et harum minima, eius quas, alias est minus dicta dolore deserunt vero fugiat officia veniam debitis accusantium id.</p>
+          <div class="p-4">
+            <h1 class="h3 text-center mb-3">Bievenido a nuestro shop Gamer</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum fugit ipsa iste obcaecati veritatis consectetur quaerat distinctio consequatur nihil! Iusto a natus voluptates iure magnam nihil veritatis, mollitia hic nesciunt quam ipsam expedita praesentium sequi ducimus animi sit at, quo fuga id quisquam perspiciatis. Magnam saepe nesciunt quis nemo similique perspiciatis quibusdam et harum minima, eius quas, alias est minus dicta dolore deserunt vero fugiat officia veniam debitis accusantium id.</p>
+          </div>
+          
         </div>
+
+        <!-- imagen info -->
         <div class="col-12 col-md-6">
-
-
-          <img class="info-img" src="/assets/images/info.jpg" alt="Imagen gamer info">
-
-
+          <div class="p-0">
+            <img class="info-img" src="/assets/images/info.jpg" alt="Imagen gamer info">
+          </div>
         </div>
 
       </section>
 
       <!-- Sección de productos destacados -->
+
+      <section class="section-products">
+        <h2 class="section-title">Productos destacados</h2>
+
+        <div class="products-container">
+          <div class="product-wrapper">
+            <div class="product-card">
+              <!-- Cabecera de mi card producto -->
+              <div class="product-card-header">
+
+                <img class="product-image" src="https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA08519_00/12/i_3da1cf7c41dc7652f9b639e1680d96436773658668c7dc3930c441291095713b/i/icon0.png" alt="">
+                <div class="product-category">ACTION</div>
+
+              </div>
+
+              <!-- Cuerpo de mi card producto -->
+              <div class="product-card-body">
+
+                <h3 class="product-title">Titulo del juego</h3>
+                <p class="product-price">$59.99</p>
+
+              </div>
+
+
+              <!-- Pie de mi card producto -->
+              <div class="product-card-footer">
+                <button class="btn btn-primary">
+                  COMPRAR
+                </button>
+                <button class="btn btn-dark">
+                  <i class="fa-solid fa-link"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+
       <!-- Sección de características de nuestro servicio -->
+      <section class="section-features">
+        <h2 class="section-title">En que nos destacamos</h2>
+
+        <div class="row g-0">
+
+          <div class="col-12 col-sm-4">
+            <div class="feature-container">
+              <i class="fa-solid fa-truck"></i>
+              <p>Envío gratis en compras mayores a $100</p>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4">
+            <div class="feature-container">
+              <i class="fa-solid fa-box"></i>
+              <p>Devoluciones gratis dentro de los 30 días</p>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4">
+            <div class="feature-container">
+              <i class="fa-solid fa-headset"></i>
+              <p>Atención al cliente 24/7</p>
+            </div>
+          </div>
+
+        </div>
+
+       </section>
 
     </main>
 
 
     <!-- Footer, pie de página -->
+    <footer class="main-footer container-fluid">
+
+      <div class="row">
+
+
+        <div class="col-12 col-md-4">
+          <section class="footer-social">
+
+            <ul class="social-list">
+
+              <li class="social-item">
+                <a href="#linkFacebook">
+                  <i class="fa-brands fa-square-facebook"></i>
+                  Facebook
+                </a>
+              </li>
+
+              <li class="social-item">
+                <a href="">
+                  <i class="fa-brands fa-linkedin"></i>
+                  LinkedIn
+                </a>
+              </li>
+
+              <li class="social-item">
+                <a href="">
+                  <i class="fa-brands fa-square-instagram"></i>
+                  Instagram
+                </a>
+              </li>
+            </ul>
+
+          </section>
+        </div>
+
+
+
+
+
+        <div class="col-12 col-md-4">
+          <section class="footer-brand">
+            BRAND NAME
+          </section>
+        </div>
+        <div class="col-12 col-md-4">
+          <section class="footer-contact">
+            CONTACT OPTIONS
+          </section>
+        </div>
+      </div>
+  
+    </footer> 
 
   </body>
 </html>
