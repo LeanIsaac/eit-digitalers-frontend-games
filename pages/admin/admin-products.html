@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ADMIN PRODUCTS</title>
 
-  <!-- Bootstrap -->
+    <!-- #Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,7 +18,7 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- Fontawesome Icons -->
+    <!-- #Fontawesome Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
@@ -29,7 +29,9 @@
 
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="/css/styles.css" />
-
+    <link rel="stylesheet" href="/css/table.css">
+    <!-- Scripts JS personalizados -->
+    <script src="/js/admin-products.js" defer>  </script>
 </head>
 <body>
   <!-- Header o cabecera con su navbar -->
@@ -51,7 +53,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"
+                <a class="nav-link active" aria-current="page" href="/index.html"
                   >Principal</a
                 >
               </li>
@@ -83,12 +85,78 @@
     </header>
 
     <main class="container-xl p-0 overflow-hidden">
-      <h1>ADMINISTRADOR DE PRODUCTOS</h1>
+
+      <h1 class="main-title">ADMINISTRADOR DE PRODUCTOS</h1>
+      <!-- #row de productos -->
+      <div class="row">
+
+        <!-- #div del FORMULARIO -->
+        <div class="col-12 col-lg-4">
+          FORMULARIO
+        </div>
+
+        <!-- #div de FILTROS Y TABLA DE PRODUCTOS -->
+        <div class="col-12 col-lg-8">
+          <div class="row p-4">FILTROS</div>
+
+
+
+
+
+
+
+
+
+
+
+          <div class="table-container p-4">
+
+            <table class="table table-admin">
+
+              <thead>
+                <tr>
+                  <th>Imagen</th>
+                  <th>Titulo</th>
+                  <th>Categoría</th>
+                  <th>Precio</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody id="tableBody">
+                
+              </tbody>
+
+            </table>
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+
         
     </main>
 
-
-     <!-- Footer, pie de página -->
+    <!-- Footer, pie de página -->
     <footer class="main-footer container-fluid">
       <div class="row">
         <div class="col-12 col-md-4">
@@ -126,6 +194,5 @@
         </div>
       </div>
     </footer>
-    
 </body>
 </html>
