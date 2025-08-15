@@ -92,21 +92,91 @@
 
         <!-- #div del FORMULARIO -->
         <div class="col-12 col-lg-4">
-          FORMULARIO
+
+          <form id="gamesForm" class="py-3 px-5">
+
+            <div class="mb-3">
+              <label for="title" class="form-label">Título del juego</label>
+              <input  type="text" 
+                      class="form-control" 
+                      id="title"
+                      name="name"
+                      required       
+                      minlength="2"
+                      maxlength="80"
+                      value="Juego de Prueba"
+              >
+            </div>
+
+            <div class="mb-3 row">
+              <div class="col-6">
+                <label for="price" class="form-label">Precio</label>
+                <input  type="number" 
+                        class="form-control"
+                        name="price"
+                        required
+                        min="0"
+                        max="9999"
+                        step="0.01"
+                        value="20"
+                >
+              </div>
+
+              <div class="col-6">
+                <label class="form-label">Categoría</label>
+                <select name="category" class="form-select" required>
+
+                  <option value="action">Acción</option>
+                  <option value="adventure">Aventura</option>
+                  <option value="strategy">Estrategia</option>
+                  <option value="role-playing">Rol</option>
+                  <option value="simulation">Simulación</option>
+                  <option value="sports" selected>Deportes</option>
+
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="" class="form-label">URL Imagen</label>
+              <input  type="url" 
+                      name="image"
+                      class="form-control"
+                      required
+                      value="https://img.goodfon.com/wallpaper/big/5/df/valorant-viper-battlestar-galactica-video-games-smoke-neon-d.webp"
+              >
+            </div>
+
+            <div class="mb-3">
+              <label for="" class="form-label">Descripción</label>
+              <textarea class="form-control"
+                        placeholder="Escribe una descripción del juego..."
+                        name="description" 
+                        rows="5"
+                        required
+                        minlength="20"
+                        maxlength="500"
+              >Descripción de prueba para checkear la carga de mis JS</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Cargar</button>
+
+          </form>
+          
+
+
+
+
+
+
+
+"
+
         </div>
 
         <!-- #div de FILTROS Y TABLA DE PRODUCTOS -->
         <div class="col-12 col-lg-8">
           <div class="row p-4">FILTROS</div>
-
-
-
-
-
-
-
-
-
 
 
           <div class="table-container p-4">
@@ -125,7 +195,7 @@
               </thead>
 
               <tbody id="tableBody">
-                
+
               </tbody>
 
             </table>

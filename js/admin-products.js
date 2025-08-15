@@ -49,64 +49,94 @@ const games = [
     image:
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2651280/cb8da9b3e99cf7362cd88c10a0544b7fe892ccad/capsule_616x353.jpg?t=1750954033",
     price: 39.99,
-    category: "Action",
-    description: "An action-adventure game where players control both Peter Parker and Miles Morales as they fight against various villains in New York City.",
+    category: "Adventure",
+    description:
+      "An action-adventure game where players control both Peter Parker and Miles Morales as they fight against various villains in New York City.",
     createdAt: "2023-10-05T12:00:00Z",
-  }
+  },
 ];
+
+// const deleteBtns = document.querySelectorAll(".btn-danger");
+
+const gamesForm = document.getElementById("gamesForm");
 
 const tableBody = document.getElementById("tableBody");
 
+gamesForm.addEventListener("submit", (evento) => {
 
-games.forEach((juego) => {
+  evento.preventDefault();
 
-    tableBody.innerHTML += `<tr>
-    <td class="cell-image">
-      <img src="${juego.image}" alt="Imagen del producto" />
-    </td>
-    <td class="cell-name">${juego.name}</td>
+  // console.log("Formulario enviado", evento)
 
-    <td class="cell-category">${juego.category}</td>
+  const el = evento.target.elements;
 
-    <td class="cell-price">$ ${juego.price}</td>
+  const newGame = {
+    id: Date.now(), // timestamp
+    name: el.name.value, // input text
+    price: el.price.value, // input number
+    description: el.description.value,  // textarea 
+    category: el.category.value, // select
+    image: el.image.value, // input url
+    createdAt: new Date().toISOString(), // fecha actual en formato ISO
+  }
 
-    <td class="cell-date">2023-10-01</td>
+  console.log(newGame);
 
-    <td class="cell-actions">
-      <button class="btn btn-primary btn-sm">
-        <i class="fa-solid fa-pencil"></i>
-      </button>
-      <button class="btn btn-danger btn-sm">
-        <i class="fa-solid fa-trash"></i>
-      </button>
-    </td>
-  </tr>`;
+  // Agregar el nuevo juego al array de juegos
+  games.push(newGame);
+
+  // Vuelvo a iterar el array de juegos para actualizar la tabla
+  buildTable(games);
 
 })
 
+function buildTable(arrayJuegos) {
+  // Limpiar el contenido previo del body de la tabla
+  tableBody.innerHTML = "";
+
+  arrayJuegos.forEach((juego, posicion) => {
 
 
+    tableBody.innerHTML += `<tr>
+      <td class="cell-image">
+        <img src="${juego.image}" alt="Imagen del producto" />
+      </td>
+      <td class="cell-name">${juego.name}</td>
 
-/*
-<tr>
-  <td class="cell-image">
-    <img src="https://picsum.photos/100/100" alt="Imagen del producto" />
-  </td>
-  <td class="cell-name">Título del Producto</td>
+      <td class="cell-category">${juego.category}</td>
 
-  <td class="cell-category">Categoría del Producto</td>
+      <td class="cell-price">$ ${juego.price}</td>
 
-  <td class="cell-price">$100.00</td>
+      <td class="cell-date">${juego.createdAt}</td>
 
-  <td class="cell-date">2023-10-01</td>
+      <td class="cell-actions">
+        <button class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-pencil"></i>
+        </button>
 
-  <td class="cell-actions">
-    <button class="btn btn-primary btn-sm">
-      <i class="fa-solid fa-pencil"></i>
-    </button>
-    <button class="btn btn-danger btn-sm">
-      <i class="fa-solid fa-trash"></i>
-    </button>
-  </td>
-</tr>;
-*/
+        <button class="btn btn-danger btn-sm" onclick="deleteGame(${juego.id})">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+    </tr>`;
+  });
+
+}
+
+function deleteGame(id) {
+
+  // Debería conocer el id del juego a eliminar
+  // Vamos a obtener el índice del juego en el array
+  const indice = games.findIndex(juego => {
+    return juego.id === id;
+  })
+
+  // Eliminar el juego del array
+  games.splice(indice, 1);
+
+  buildTable(games);
+}
+
+
+// Inicializo la tabla con los juegos existentes
+buildTable(games);
