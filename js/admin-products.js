@@ -38,7 +38,7 @@ const games = [
     image:
       "https://juegosdigitalesargentina.com/files/images/productos/1618591872-the-witcher-3-wild-hunt-complete-edition-ps5.jpg",
     price: 49.99,
-    category: "RPG",
+    category: "Role-Playing",
     description:
       "An open-world RPG that follows Geralt of Rivia as he searches for his adopted daughter while battling monsters and engaging in political intrigue.",
     createdAt: "2023-10-04T12:00:00Z",
@@ -54,13 +54,19 @@ const games = [
       "An action-adventure game where players control both Peter Parker and Miles Morales as they fight against various villains in New York City.",
     createdAt: "2023-10-05T12:00:00Z",
   },
+  
 ];
 
-// const deleteBtns = document.querySelectorAll(".btn-danger");
-
+// Obtenemos elementos del DOM
 const gamesForm = document.getElementById("gamesForm");
-
 const tableBody = document.getElementById("tableBody");
+const searchInput = document.querySelector("#searchInput");
+const categorySelect = document.querySelector("#categoryFilter");
+
+const sortBtns = document.querySelectorAll("[data-order]");
+
+
+
 
 gamesForm.addEventListener("submit", (evento) => {
 
@@ -85,6 +91,16 @@ gamesForm.addEventListener("submit", (evento) => {
   // Agregar el nuevo juego al array de juegos
   games.push(newGame);
 
+  Swal.fire({
+    icon: "success",
+    title: "Carga correcta!",
+    text: "El juego se ha cargado correctamente.",
+    // // position: "top-end",
+    // // toast: true,
+    // showConfirmButton: false,
+    theme: "dark"
+  })
+
   // Vuelvo a iterar el array de juegos para actualizar la tabla
   buildTable(games);
 
@@ -94,6 +110,15 @@ function buildTable(arrayJuegos) {
   // Limpiar el contenido previo del body de la tabla
   tableBody.innerHTML = "";
 
+  if( arrayJuegos.length === 0) {
+    tableBody.innerHTML = `<tr>
+      <td colspan="6" class="text-center p-4">
+        <h3 class="text-secondary">No hay juegos disponibles</h3>
+      </td>
+    </tr>`;
+    return; // Salir de la función si no hay juegos
+  }
+
   arrayJuegos.forEach((juego, posicion) => {
 
 
@@ -101,7 +126,11 @@ function buildTable(arrayJuegos) {
       <td class="cell-image">
         <img src="${juego.image}" alt="Imagen del producto" />
       </td>
-      <td class="cell-name">${juego.name}</td>
+      <td class="cell-name">
+      
+        <span onclick="showDialog(${juego.id})">  ${juego.name} </span>
+      
+      </td>
 
       <td class="cell-category">${juego.category}</td>
 
@@ -125,18 +154,136 @@ function buildTable(arrayJuegos) {
 
 function deleteGame(id) {
 
-  // Debería conocer el id del juego a eliminar
-  // Vamos a obtener el índice del juego en el array
-  const indice = games.findIndex(juego => {
-    return juego.id === id;
-  })
+  const isConfirmed = confirm("¿Estás seguro de eliminar el juego?");
 
-  // Eliminar el juego del array
-  games.splice(indice, 1);
+  if (isConfirmed) {
+    // Debería conocer el id del juego a eliminar
+    // Vamos a obtener el índice del juego en el array
+    const indice = games.findIndex((juego) => {
+      return juego.id === id;
+    });
 
-  buildTable(games);
+    // Eliminar el juego del array
+    games.splice(indice, 1);
+
+    buildTable(games);
+  }
+  
 }
-
 
 // Inicializo la tabla con los juegos existentes
 buildTable(games);
+
+
+// #Filtros
+// #Cuando el user escriba en el searchInput
+
+searchInput.addEventListener("keyup", (evento)=> {
+
+  const inputValue = evento.target.value.toLowerCase();
+
+  // Deberiamos empezar a buscar en mi array games aquellos juegos que coincidan en su nombre con el valor que la persona ingreso en el input
+  const gamesFiltrados = games.filter((juego) => {
+
+    // Busqueda parcial en base al nombre
+    const isMatch = juego.name.toLowerCase().includes(inputValue);
+
+    // Condición: return true
+    return isMatch;
+
+  })
+
+  console.log(gamesFiltrados);
+  // Pintamos la tabla con los juegos filtrados
+  buildTable(gamesFiltrados);
+
+})
+
+categorySelect.addEventListener("change", (evento) => {
+
+  const selectedCategory = evento.target.value; // ""
+
+  // Si la categoría seleccionada es "" (todas las categoría), no filtramos
+  if(selectedCategory === "all") { // //  !selectedCategory
+
+    buildTable(games);
+    return; // Salimos de la función
+
+  }
+
+  const filteredGames = games.filter((juego) => {
+
+    if(juego.category.toLowerCase() === selectedCategory) {
+      return true; // Coincide con la categoría seleccionada
+    }
+
+    return false;
+
+  })
+
+  console.log(filteredGames);
+
+  buildTable(filteredGames);
+
+})
+
+
+sortBtns.forEach((btn) => {
+
+  btn.addEventListener("click", (event) => {
+
+    
+    const dataOrder = event.currentTarget.dataset.order;
+
+    if(dataOrder === "reset") {
+      // Si el botón es de resetear, volvemos a mostrar todos los juegos
+      buildTable(games);
+      return; // Salimos de la función
+    }
+
+    console.log("Ordenar por:", dataOrder);
+
+    const sortedGames = games.toSorted((a, b) => {
+
+      if (dataOrder === "asc") {
+        return a.price - b.price; // Orden ascendente por precio
+      }
+
+      return b.price - a.price; // Orden descendente por precio
+
+    })
+
+    buildTable(sortedGames);
+
+  })
+
+})
+
+
+function showDialog(id) {
+  // Buscar el juego por su id
+  const juego = games.find((jueguito) => {
+
+    return jueguito.id === id;
+
+  })
+
+  // Mostrar un modal de bootstrap con la información del juego
+
+  const dialog = document.getElementById("gameDetail");
+  const myModal = new bootstrap.Modal(dialog);
+
+  myModal.show();
+
+  console.log(dialog)
+
+  dialog.addEventListener("show.bs.modal", (event) => {
+    console.log("Modal abierto");
+    // event.preventDefault();
+    const title = dialog.getElementById("title");
+
+    console.log(title);
+
+    title.innerText = juego.name;
+  });
+}

@@ -27,9 +27,14 @@
       referrerpolicy="no-referrer"
     />
 
+    <!-- #Sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/form.css">
     <!-- Scripts JS personalizados -->
     <script src="/js/admin-products.js" defer>  </script>
 </head>
@@ -93,7 +98,7 @@
         <!-- #div del FORMULARIO -->
         <div class="col-12 col-lg-4">
 
-          <form id="gamesForm" class="py-3 px-5">
+          <form id="gamesForm" class="py-3 px-5 admin-form">
 
             <div class="mb-3">
               <label for="title" class="form-label">Título del juego</label>
@@ -125,14 +130,12 @@
               <div class="col-6">
                 <label class="form-label">Categoría</label>
                 <select name="category" class="form-select" required>
-
                   <option value="action">Acción</option>
                   <option value="adventure">Aventura</option>
                   <option value="strategy">Estrategia</option>
                   <option value="role-playing">Rol</option>
                   <option value="simulation">Simulación</option>
                   <option value="sports" selected>Deportes</option>
-
                 </select>
               </div>
             </div>
@@ -143,7 +146,7 @@
                       name="image"
                       class="form-control"
                       required
-                      value="https://img.goodfon.com/wallpaper/big/5/df/valorant-viper-battlestar-galactica-video-games-smoke-neon-d.webp"
+                      value="https://image.api.playstation.com/vulcan/ap/rnd/202405/2117/bd406f42e9352fdb398efcf21a4ffe575b2306ac40089d21.png"
               >
             </div>
 
@@ -164,19 +167,49 @@
           </form>
           
 
-
-
-
-
-
-
-"
-
         </div>
 
         <!-- #div de FILTROS Y TABLA DE PRODUCTOS -->
         <div class="col-12 col-lg-8">
-          <div class="row p-4">FILTROS</div>
+
+
+          <div class="row p-4 gx-3">
+
+            <div class="col-5">
+              <input  type="text" 
+                      placeholder="Buscar juego..." 
+                      class="form-control"
+                      id="searchInput">
+            </div>
+            <div class="col-4">
+              <select id="categoryFilter" class="form-select">
+                <option value="all">Todas las categorías</option>
+                <option value="action">Acción</option>
+                <option value="adventure">Aventura</option>
+                <option value="strategy">Estrategia</option>
+                <option value="role-playing">Rol</option>
+                <option value="simulation">Simulación</option>
+                <option value="sports">Deportes</option>
+              </select>
+            </div>
+
+            <div class="col-3">
+              
+              <button class="btn btn-sm btn-primary" data-order="asc">
+                <i class="fa-solid fa-caret-up"></i>
+              </button>
+
+              <button class="btn btn-sm btn-primary" data-order="desc">
+                <i class="fa-solid fa-caret-down"></i>
+              </button>
+
+              <button class="btn btn-sm btn-secondary" data-order="reset">
+                <i class="fa-solid fa-arrows-rotate"></i>
+              </button>
+
+            </div>
+          </div>
+
 
 
           <div class="table-container p-4">
@@ -221,10 +254,27 @@
         </div>
 
       </div>
-
-
-        
+      <!-- Fin del row de productos -->
     </main>
+
+    <!-- Modal -->
+    <div class="modal fade" id="gameDetail" tabindex="-1" aria-labelledby="gameDetailLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="title">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Footer, pie de página -->
     <footer class="main-footer container-fluid">
