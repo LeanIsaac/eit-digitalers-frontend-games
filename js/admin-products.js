@@ -1,3 +1,5 @@
+import { formatDate } from "./date-utils.js";
+
 const games = [
   {
     id: 1,
@@ -121,14 +123,13 @@ function buildTable(arrayJuegos) {
 
   arrayJuegos.forEach((juego, posicion) => {
 
-
     tableBody.innerHTML += `<tr>
       <td class="cell-image">
         <img src="${juego.image}" alt="Imagen del producto" />
       </td>
       <td class="cell-name">
       
-        <span onclick="showDialog(${juego.id})">  ${juego.name} </span>
+        <span data-id="${juego.id}">  ${juego.name} </span>
       
       </td>
 
@@ -136,19 +137,22 @@ function buildTable(arrayJuegos) {
 
       <td class="cell-price">$ ${juego.price}</td>
 
-      <td class="cell-date">${juego.createdAt}</td>
+      <td class="cell-date">${ formatDate(juego.createdAt) }</td>
 
       <td class="cell-actions">
         <button class="btn btn-primary btn-sm">
           <i class="fa-solid fa-pencil"></i>
         </button>
 
-        <button class="btn btn-danger btn-sm" onclick="deleteGame(${juego.id})">
+        <button class="btn btn-danger btn-sm" data-id="${juego.id}">
           <i class="fa-solid fa-trash"></i>
         </button>
       </td>
     </tr>`;
   });
+
+  getSpanDialogBtns();
+  getDeleteGameBtns();
 
 }
 
@@ -269,21 +273,63 @@ function showDialog(id) {
   })
 
   // Mostrar un modal de bootstrap con la información del juego
+  Swal.fire({
+    title: juego.name,
+    html: `<div class="product-dialog">
+      <div class="image-container">
+        <img src="${juego.image}" alt="${juego.name}" />
+      </div>
 
-  const dialog = document.getElementById("gameDetail");
-  const myModal = new bootstrap.Modal(dialog);
+      <div class="details-container">
 
-  myModal.show();
+        <div class="category">${juego.category}</div>
+        <p>${juego.description}</p>
 
-  console.log(dialog)
+        <div class="price">$ ${juego.price}</div>
 
-  dialog.addEventListener("show.bs.modal", (event) => {
-    console.log("Modal abierto");
-    // event.preventDefault();
-    const title = dialog.getElementById("title");
-
-    console.log(title);
-
-    title.innerText = juego.name;
+        <div class="footer-wrapper">
+          <div class="date">
+            ${juego.createdAt}
+          </div>
+          <button class="btn btn-primary">Editar</button>
+        </div>
+      </div>
+    </div>`,
+    theme: "dark",
+    showConfirmButton: false,
+    width: "800px",
   });
+  
+}
+
+function getSpanDialogBtns() {
+  // Obtener todos los span dentro de la clase cell-name
+  const spanDialogBtns = document.querySelectorAll(".cell-name span");
+
+  // Agregar un evento click a cada span para mostrar el dialogo
+  // console.log(spanDialogBtns);
+
+  console.log(spanDialogBtns);
+  spanDialogBtns.forEach((span) => {
+    span.addEventListener("click", (event) => {
+
+      event.stopPropagation(); // Evitar que el click se propague al padre
+      const id = parseInt(span.dataset.id); // Obtener el id del dataset
+      showDialog(id);
+    });
+  })
+}
+
+function getDeleteGameBtns() {
+
+  const deleteGameBtns = document.querySelectorAll(".cell-actions .btn-danger");
+
+  deleteGameBtns.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+
+      event.stopPropagation(); // Evitar que el click se propague al padre
+      const id = parseInt(btn.dataset.id); // Obtener el id del dataset
+      deleteGame(id);
+    });
+  })
 }
